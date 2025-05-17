@@ -1,0 +1,23 @@
+body {
+    background-image: url('./supernova.jpg');
+    background-size: 100%;
+}
+
+.conteudo {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin: 60px 35px;
+    width: 180px;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: center;
+    border: 5px solid goldenrod;
+}
+
+.conteudo > h1 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
