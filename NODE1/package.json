@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
+  },
+  "name": "node1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_ENV=development node --watch index.js",
+    "start:prod": "NODE_ENV=production node index.js ."
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
