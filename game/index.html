@@ -7,7 +7,16 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div id="space"></div>
+    <div id="space">
+      <div id="hud">
+        <span id="lives"></span>
+        <span id="score">000000</span>
+      </div>
+      <div id="gameover" style="display:none; position:absolute; top:40%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.8); color:white; padding:30px; border-radius:10px; text-align:center; z-index:100;">
+        <h2>Game Over</h2>
+        <button id="restartBtn">Restart</button>
+      </div>
+    </div>
     <script type="module" src="js/game.js"></script>
   </body>
 </html>
