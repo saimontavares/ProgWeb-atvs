@@ -1,0 +1,4 @@
+div#graph { position: relative; }
+div.red { margin-top: 5px; width: 30px; height: 0; background-color:red; margin: 1px; display: inline-block; }
+input[type=number]{ width: 80px; }
+div.graph {margin: 5px; padding: 10px 0; display: block; }
