@@ -1,11 +1,11 @@
 import express, { Response, Request } from "express"
 import dotenv from "dotenv"
 import morgan from "morgan"
+import { engine } from "express-handlebars"
 
 import validateEnv from "./utils/validateEnv"
 import logger from "./middlewares/logger"
 import router from "./routers/router"
-
 
 dotenv.config()
 const PORT = process.env.PORT ?? 7782;
@@ -13,6 +13,12 @@ const publicPath = `${process.cwd()}/public`
 console.log(`Public path: ${publicPath}`)
 
 const app = express();
+//validateEnv()
+
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+app.set('views', `${process.cwd()}/src/views`);
+//app.set('views', `${__dirname}/views`);
 
 //app.use(morgan("combined"))
 app.use(logger("complete"))

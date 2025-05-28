@@ -7,9 +7,16 @@ router.get("/", (_req, res) => {
     // res.json({valor : 12})
 })
 
+router.get('/hb1', (req, res) => {
+    res.render("hb1", {
+        mensagem: "Seja bem-vindo(a)!",
+        layout: false,
+    })
+})
+
 router.get("/bemvindo/:nome", (req, res) => {
     const nome = req.params.nome;
-    res.send(`Bem-vindo ${nome}!`)
+    res.send(`Bem-vindo ${nome} ao ICOMP!`)
 });
 
 const html = `

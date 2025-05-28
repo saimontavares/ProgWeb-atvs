@@ -137,6 +137,6 @@ dist
 
 .env
 
-logs/*
+./logs/*
 !logs/.gitkeep
 build/*
