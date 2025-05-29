@@ -6,11 +6,13 @@
   "name": "node1",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=development node --watch index.js",
-    "start:prod": "NODE_ENV=production node index.js ."
+    "start": "NODE_ENV=development npx nodemon src/index.js",
+    "start:prod": "NODE_ENV=production node src/index.js"
   },
   "author": "",
   "license": "ISC",
