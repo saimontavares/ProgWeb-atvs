@@ -1,0 +1,46 @@
+body {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: aliceblue;
+}
+
+h1{
+    margin: 30px;
+}
+
+div {
+    margin: 40px 10px;
+}
+
+div#input{
+    font-size: 24px;
+}
+
+input,
+button {
+  border: 1px solid lightgray;
+}
+
+input[type="number"]{
+    height: 28px;
+    width: 70px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Para navegadores WebKit (Chrome, Safari) */
+    margin: 0;              /* Remove a margem padrão que pode aparecer */
+}
+input[type="number"] {
+    -moz-appearance: textfield; /* Para navegadores Mozilla (Firefox) */
+}
+
+button{
+    height: 30px;
+    width: 70px;
+    border-radius: 5px;
+    font-size: 20px;
+}
