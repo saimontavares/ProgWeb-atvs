@@ -33,7 +33,7 @@ const hb2 = (req: Request, res: Response) => {
         nome: 'React',
         tipo: 'library',
         poweredByNode: true,
-        layout: false,
+        layout: "main",
     });
 };
 
@@ -44,7 +44,7 @@ const hb3 = (req: Request, res: Response) => {
         { nome: 'Edleno Moura', sala: 1236 },
         { nome: 'Elaine Harada', sala: 1231 }
     ];
-    res.render('hb3', { profes, layout: false });
+    res.render('hb3', { profes, layout: "main" });
 };
 
 const hb4 = (req: Request, res: Response) => {
@@ -57,7 +57,7 @@ const hb4 = (req: Request, res: Response) => {
         { name: 'Docker', type: 'Virtualization', poweredByNodejs: false },
         { name: 'Sequelize', type: 'ORM tool', poweredByNodejs: true },
     ];
-    res.render('hb4', { technologies, layout: false });
+    res.render('hb4', { technologies, layout: "main" });
 };
 
 export default { index, lorem, bemvindo, hb1, hb2, hb3, hb4 };
