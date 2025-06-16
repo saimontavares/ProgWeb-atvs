@@ -26,6 +26,25 @@ router.get('/hb1', (req, res) => {
     })
 })
 
+router.get('/hb2', (req, res) => {
+    res.render('hb2', {
+        poweredByNodejs: true,
+        name: 'Express',
+        type: 'Framework',
+        layout: false,
+    });
+});
+
+router.get('/hb3', (req, res) => {
+    const profes = [
+        { nome: 'David Fernandes', sala: 1238 },
+        { nome: 'Horácio Fernandes', sala: 1233 },
+        { nome: 'Edleno Moura', sala: 1236 },
+        { nome: 'Elaine Harada', sala: 1231 }
+    ];
+    res.render('hb3', { profes, layout: false });
+});
+
 router.get("/bemvindo/:nome", (req, res) => {
     const nome = req.params.nome;
     res.send(`Bem-vindo ${nome} ao ICOMP!`)
