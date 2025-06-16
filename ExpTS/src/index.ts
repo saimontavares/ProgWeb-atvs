@@ -15,7 +15,10 @@ console.log(`Public path: ${publicPath}`)
 
 const app = express();
 
-app.engine('handlebars', engine());
+//app.engine('handlebars', engine());
+app.engine("handlebars", engine({
+    helpers: require(`${__dirname}/views/helpers/helpers.ts`)
+}));
 app.set('view engine', 'handlebars');
 app.set('views', `${process.cwd()}/src/views`);
 //app.set('views', `${__dirname}/views`);
