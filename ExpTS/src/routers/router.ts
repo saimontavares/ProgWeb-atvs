@@ -1,10 +1,22 @@
 import { Router } from 'express';
+import { LoremIpsum } from "lorem-ipsum";
 
 const router = Router();
 
 router.get("/", (_req, res) => {
     res.send("Hello World!")
     // res.json({valor : 12})
+})
+
+router.get("/lorem/:numero", (_req, res) => {
+    const numero = parseInt(_req.params.numero, 10);
+    if (isNaN(numero) || numero < 1) {
+        res.status(400).send("Parâmetro inválido. Informe um número inteiro positivo.");
+        return;
+    }
+    const lorem = new LoremIpsum();
+    const paragrafos = Array.from({ length: numero }, () => `<p>${lorem.generateParagraphs(1)}</p>`).join('\n');
+    res.send(paragrafos);
 })
 
 router.get('/hb1', (req, res) => {
