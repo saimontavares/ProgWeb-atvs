@@ -23,8 +23,8 @@ const bemvindo = (req: Request, res: Response)=> {
 
 const hb1 = (req: Request, res: Response) =>  {
     res.render("hb1", {
-        mensagem: "Seja bem-vindo(a)!",
-        layout: false,
+        mensagem: "Universidade Federal do Amazonas",
+        layout: "main",
     })
 };
 
