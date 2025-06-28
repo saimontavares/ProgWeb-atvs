@@ -10,7 +10,7 @@ export const getAllMajors = async (): Promise<Major[]> => {
 export const createMajor = async (
     newMajor: CreateMajorDto
 ): Promise<Major> => {
-    return await prisma.major.create({ data: newMajor })
+    return await prisma.major.create({ data: newMajor });
 }
 
 export const getMajor = async (id: string): Promise<Major | null> => {

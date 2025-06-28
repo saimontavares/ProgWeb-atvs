@@ -22,7 +22,7 @@ const create = async (req: Request, res: Response) => {
 export const read = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
-        const major = await getMajor(id); // Remova o parseInt
+        const major = await getMajor(id);
         res.render('major/read', { major });
     } catch (error) {
         console.error(error);

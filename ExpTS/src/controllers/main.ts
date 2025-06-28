@@ -30,9 +30,9 @@ const hb1 = (req: Request, res: Response) =>  {
 
 const hb2 = (req: Request, res: Response) => {
     res.render('hb2', {
-        nome: 'React',
-        tipo: 'library',
-        poweredByNode: true,
+        name: 'React',
+        type: 'library',
+        poweredByNodejs: true,
         layout: "main",
     });
 };

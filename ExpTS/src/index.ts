@@ -16,6 +16,9 @@ console.log(`Public path: ${publicPath}`)
 const app = express();
 
 //app.engine('handlebars', engine());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.engine("handlebars", engine({
     helpers: require(`${__dirname}/views/helpers/helpers.ts`)
 }));
@@ -38,5 +41,5 @@ app.use('/img', express.static(`${publicPath}/img`))
 app.use(router);
 
 app.listen(PORT, () => {
-    console.log(`Express app iniciada na porta ${PORT}`);
+    console.log(`Express app iniciada na porta ${PORT}, link: http://localhost:${PORT}`);
 });
