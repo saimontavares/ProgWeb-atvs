@@ -8,7 +8,7 @@ import logger from "./middlewares/logger"
 import router from "./routers/router"
 
 dotenv.config()
-//validateEnv()
+validateEnv()
 const PORT = process.env.PORT ?? 7782;
 const publicPath = `${process.cwd()}/public`
 console.log(`Public path: ${publicPath}`)
@@ -16,11 +16,11 @@ console.log(`Public path: ${publicPath}`)
 const app = express();
 
 //app.engine('handlebars', engine());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false })); 
 app.use(express.json());
 
 app.engine("handlebars", engine({
-    helpers: require(`${__dirname}/views/helpers/helpers.ts`)
+    helpers: require(`${__dirname}/views/helpers/helpers`)
 }));
 app.set('view engine', 'handlebars');
 app.set('views', `${process.cwd()}/src/views/main`);

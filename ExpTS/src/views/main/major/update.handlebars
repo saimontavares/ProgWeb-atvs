@@ -1,0 +1,24 @@
+<h3>Editar Curso</h3>
+{{#if error}}
+    <div class="alert alert-danger">{{error}}</div>
+{{/if}}
+<div class="d-flex justify-content-between">
+    <div>
+        <a href="/major/" class="btn btn-danger">Cancelar</a>
+    </div>
+</div>
+<form action="/major/update/{{major.id}}" method="POST">
+    <div class="mb-3">
+        <label for="name" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="name" name="name" value="{{major.name}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="code" class="form-label">Sigla</label>
+        <input type="text" class="form-control" id="code" name="code" value="{{major.code}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Descrição</label>
+        <textarea class="form-control" id="description" name="description" rows="3">{{major.description}}</textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Salvar</button>
+</form>

@@ -1,0 +1,24 @@
+<h3>Editar Usuário</h3>
+{{#if error}}
+    <div class="alert alert-danger">{{error}}</div>
+{{/if}}
+<div class="d-flex justify-content-between">
+    <div>
+        <a href="/user/" class="btn btn-danger">Cancelar</a>
+    </div>
+</div>
+<form action="/user/update/{{user.id}}" method="POST">
+    <div class="mb-3">
+        <label for="fullName" class="form-label">Nome Completo</label>
+        <input type="text" class="form-control" id="fullName" name="fullName" value="{{user.fullName}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="email" class="form-control" id="email" name="email" value="{{user.email}}" required>
+    </div>
+    <div class="mb-3">
+        <label for="majorId" class="form-label">Curso (majorId)</label>
+        <input type="text" class="form-control" id="majorId" name="majorId" value="{{user.majorId}}">
+    </div>
+    <button type="submit" class="btn btn-success">Salvar</button>
+</form>

@@ -60,4 +60,16 @@ const hb4 = (req: Request, res: Response) => {
     res.render('hb4', { technologies, layout: "main" });
 };
 
-export default { index, lorem, bemvindo, hb1, hb2, hb3, hb4 };
+const about = (req: Request, res: Response) => {
+    res.render('about', {
+        layout: "main",
+        titulo: "Sobre o Space Shooter",
+        texto: "Shooter: Space Shot , conhecido no Japão como Simple 1500 Series 35: The Shooting ( SIMPLE1500シリーズ 35 The シューティング) , é um jogo de tiro com rolagem horizontal . Originalmente lançado no Japão como parte da série Simple em 2000, foi lançado na América do Norte pela A1 Games e Agetec . [ 1 ] Os jogadores podem jogar o jogo ou praticar suas várias habilidades em dois modos diferentes de jogo usando apenas uma nave.",
+        imagens: [
+            "/img/space-shooter1.png",
+            "/img/space-shooter2.png"
+        ]
+    });
+};
+
+export default { index, lorem, bemvindo, hb1, hb2, hb3, hb4, about };

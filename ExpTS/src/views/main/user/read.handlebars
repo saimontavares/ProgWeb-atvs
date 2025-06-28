@@ -1,0 +1,20 @@
+<h3>Detalhes do Usuário</h3>
+<div class="d-flex justify-content-between">
+    <div>
+        <a href="/user/update/{{user.id}}" class="btn btn-warning"><i class="bi bi-pencil"></i> Editar</a>
+        <a href="/user/" class="btn btn-primary">Voltar</a>
+    </div>
+</div>
+{{#if user}}
+    <div class="card" style="width: 22rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{user.fullName}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{user.email}}</h6>
+            <p class="card-text"><strong>Curso (majorId):</strong> {{user.majorId}}</p>
+            <p class="card-text"><strong>Criado em:</strong> {{user.createdAt}}</p>
+            <p class="card-text"><strong>Atualizado em:</strong> {{user.updatedAt}}</p>
+        </div>
+    </div>
+{{else}}
+    <p>Usuário não encontrado.</p>
+{{/if}}

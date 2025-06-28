@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import mainController from '../controllers/main';
 import majorController from '../controllers/major';
+import userController from '../controllers/user';
 
 const router = Router();
 
@@ -11,6 +12,7 @@ router.get('/hb1', mainController.hb1);
 router.get('/hb2', mainController.hb2);
 router.get('/hb3', mainController.hb3);
 router.get('/hb4', mainController.hb4);
+router.get("/about", mainController.about);
 
 // MajorController
 router.get('/major', majorController.index)
@@ -20,6 +22,15 @@ router.post('/major/create', majorController.create)
 router.get('/major/update/:id', majorController.update)
 router.post('/major/update/:id', majorController.update)
 router.post('/major/remove/:id', majorController.remove)
+
+// UserController
+router.get('/user', userController.index)
+router.get('/user/create', userController.create)
+router.post('/user/create', userController.create)
+router.get('/user/read/:id', userController.read)
+router.get('/user/update/:id', userController.update)
+router.post('/user/update/:id', userController.update)
+router.post('/user/remove/:id', userController.remove)
 
 const html = `
 <!DOCTYPE html>
@@ -39,9 +50,5 @@ const html = `
 router.get("/html", (_req, res) => {
     res.send(html)
 });
-
-router.get("/about", (_req, res) => {
-    res.send("Página About!")
-})
 
 export default router;
