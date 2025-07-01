@@ -1,0 +1,18 @@
+<h3>Detalhes do Curso</h3>
+<div class="d-flex justify-content-between">
+    <div>
+        <a href="/major/update/{{major.id}}" class="btn btn-warning"><i class="bi bi-pencil"></i> Editar</a>
+        <a href="/major/" class="btn btn-primary">Voltar</a>
+    </div>
+</div>
+{{#if major}}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{major.name}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{major.code}}</h6>
+            <p class="card-text">{{major.description}}</p>
+        </div>
+    </div>
+{{else}}
+    <p>Curso não encontrado.</p>
+{{/if}}
