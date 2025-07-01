@@ -62,21 +62,9 @@ export const update = async (req: Request, res: Response) => {
 
 export const remove = async (req: Request, res: Response) => {
     const { id } = req.params;
-    if (req.method === 'GET') {
+    if (req.method === 'POST') {
         try {
-            const major = await getMajor(id);
-            res.render('major/remove', { major });
-        } catch (error) {
-            console.error(error);
-        }
-    } else if (req.method === 'POST') {
-        try {
-            const removedMajor = req.body as RemoveMajorDto;
-            const { error } = majorSchema.validate(removedMajor);
-            if (error) {
-                return res.status(400).render('major/remove', { error: error.details[0].message, major: removedMajor });
-            }
-            await removeMajor(removedMajor.id);
+            await removeMajor(id);
             res.redirect('/major');
         } catch (error) {
             console.error(error);

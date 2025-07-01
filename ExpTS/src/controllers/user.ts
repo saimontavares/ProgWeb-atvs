@@ -62,24 +62,12 @@ export const update = async (req: Request, res: Response) => {
 
 export const remove = async (req: Request, res: Response) => {
     const { id } = req.params;
-    if (req.method === 'GET') {
+    if (req.method === 'POST') {
         try {
-            const user = await getUser(id);
-            res.render('user/remove', { user });
-        } catch (error) {
-            console.error(error);
-        }
-    } else if (req.method === 'POST') {
-        // Aqui só precisa validar se o id existe
-        if (!req.body.id) {
-            return res.status(400).render('user/remove', { error: 'ID é obrigatório.', user: req.body });
-        }
-        try {
-            await removeUser(req.body.id);
+            await removeUser(id);
             res.redirect('/user');
         } catch (error) {
             console.error(error);
-            res.status(500).render('user/remove', { error: 'Erro ao remover usuário.', user: req.body });
         }
     }
 }

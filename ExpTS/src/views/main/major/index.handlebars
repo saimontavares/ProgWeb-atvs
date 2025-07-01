@@ -20,7 +20,26 @@
             <td style="text-align: right">
                 <a href="/major/read/{{id}}" class="btn btn-info"><i class="bi bi-info-circle"></i></a>
                 <a href="/major/update/{{id}}" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
-                <a href="/major/remove/{{id}}" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removerMajor-{{id}}">
+                    <i class="bi bi-trash"></i>
+                </button>
+                <div class="modal fade" id="removerMajor-{{id}}" tabindex="-1" aria-labelledby="removerMajorLabel-{{id}}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="removerMajorLabel-{{id}}">Remover Curso</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Tem certeza que deseja remover o curso <strong>{{name}}</strong>?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                <button type="button" class="btn btn-danger" onclick="removerMajor('{{id}}')">Remover</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </td>
         </tr>
         {{/each}}

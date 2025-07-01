@@ -22,7 +22,26 @@
             <td style="text-align: right">
                 <a href="/user/read/{{id}}" class="btn btn-info"><i class="bi bi-info-circle"></i></a>
                 <a href="/user/update/{{id}}" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
-                <a href="/user/remove/{{id}}" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removerUser-{{id}}">
+                    <i class="bi bi-trash"></i>
+                </button>
+                <div class="modal fade" id="removerUser-{{id}}" tabindex="-1" aria-labelledby="removerUserLabel-{{id}}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="removerUserLabel-{{id}}">Remover Usuário</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Tem certeza que deseja remover o usuário <strong>{{fullName}}</strong>?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                <button type="button" class="btn btn-danger" onclick="removerUser('{{id}}')">Remover</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </td>
         </tr>
         {{/each}}
