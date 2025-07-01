@@ -34,9 +34,9 @@ app.use(logger("complete"))
 //    next()
 //})
 
-app.use('/css', express.static(`${publicPath}/css`))
-app.use('/js', express.static(`${publicPath}/js`))
-app.use('/img', express.static(`${publicPath}/img`))
+app.use('/css', express.static(`${publicPath}/css/`))
+app.use('/js', express.static(`${publicPath}/js/`))
+app.use('/img', express.static(`${publicPath}/img/`))
 
 app.use(router);
 
