@@ -4,6 +4,12 @@ import morgan from "morgan"
 import { engine } from "express-handlebars"
 import cookieParser from 'cookie-parser';
 
+declare module "express-session" {
+    interface SessionData {
+        logado: boolean;
+    }
+}
+
 import validateEnv from "./utils/validateEnv"
 import logger from "./middlewares/logger"
 import router from "./routers/router"

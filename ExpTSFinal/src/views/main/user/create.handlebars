@@ -6,17 +6,28 @@
     <a href="/user/" class="btn btn-primary">Voltar</a>
     <form action="/user/create" method="POST">
         <div class="mb-3">
-            <label for="fullName" class="form-label">Nome Completo</label>
-            <input type="text" class="form-control" id="fullName" name="fullName" required>
+            <label for="name" class="form-label">Nome Completo</label>
+            <input type="text" class="form-control" id="name" name="name" required>
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">E-mail</label>
             <input type="email" class="form-control" id="email" name="email" required>
         </div>
         <div class="mb-3">
-            <label for="majorId" class="form-label">Curso</label>
-            <input type="text" class="form-control" id="majorId" name="majorId">
+            <label for="password" class="form-label">Senha</label>
+            <input type="password" class="form-control" id="password" name="password" required>
         </div>
+        <div class="mb-3">
+            <label for="curso" class="form-label">SelecionarCurso</label>
+            <select class="form-select" aria-label="Default select example">
+            {{!-- <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option> --}}
+            {{#each majors}}
+                <option value="{{this.id}}">{{this.code}} - {{this.name}}</option>
+            {{/each}}
+            </select>
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
 </div>

@@ -14,6 +14,8 @@ router.get('/hb2', mainController.hb2);
 router.get('/hb3', mainController.hb3);
 router.get('/hb4', mainController.hb4);
 router.get("/about", mainController.about);
+router.get('/create-cookie', mainController.createCookie);
+router.get('uuid', mainController.clearCookie);
 
 // MajorController
 router.get('/major', majorController.index)
@@ -32,9 +34,8 @@ router.get('/user/read/:id', userController.read)
 router.get('/user/update/:id', userController.update)
 router.post('/user/update/:id', userController.update)
 router.post('/user/remove/:id', userController.remove)
-
-router.get('/create-cookie', mainController.createCookie);
-router.get('uuid', mainController.clearCookie);
+router.all('/user/login', userController.login)
+router.all('/user/logout', userController.logout)
 
 const html = `
 <!DOCTYPE html>

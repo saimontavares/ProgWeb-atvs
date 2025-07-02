@@ -1,7 +1,8 @@
 import { Request, Response } from 'express'
-import { getAllUsers, getUser, createUser, updateUser, removeUser } from '../services/user'
+import { getAllUsers, getUser, createUser, updateUser, removeUser, checkCredentials } from '../services/user'
 import { CreateUserDto, UpdateUserDto, RemoveUserDto } from '../types/user'
 import { userSchema } from '../validators/userValidator'
+import { getAllMajors } from '../services/major'
 
 export const index = async (req: Request, res: Response) => {
     const users = await getAllUsers();
@@ -10,18 +11,14 @@ export const index = async (req: Request, res: Response) => {
 
 export const create = async (req: Request, res: Response) => {
     if (req.method === 'GET') {
-        res.render('user/create');
+        const majors = await getAllMajors();
+        res.render('user/create', { majors });
     } else if (req.method === 'POST') {
-        const { error, value } = userSchema.validate(req.body);
-        if (error) {
-            return res.status(400).render('user/create', { error: error.details[0].message, user: req.body });
-        }
         try {
-            await createUser(value);
+            const user = await createUser(req.body as CreateUserDto);
             res.redirect('/user');
         } catch (error) {
             console.error(error);
-            res.status(500).render('user/create', { error: 'Erro ao criar usuário.', user: req.body });
         }
     }
 }
@@ -72,10 +69,32 @@ export const remove = async (req: Request, res: Response) => {
     }
 }
 
+const login = async (req: Request, res: Response) => {
+    if (req.method === 'GET') {
+        res.render('user/login');
+    }
+    else if (req.method === 'POST') {
+        const { email, password } = req.body;
+        const ok = await checkCredentials(email, password);
+        if (ok) {
+            req.session.logado = true;
+            res.redirect('/');
+        }
+    }
+}
+const logout = async (req: Request, res: Response) => {
+    req.session.destroy(() => {
+        res.clearCookie('connect.sid');
+        res.redirect('/');
+    })
+}
+
 export default {
     index,
     create,
     read,
     update,
-    remove
+    remove,
+    login,
+    logout
 };

@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { LoremIpsum } from "lorem-ipsum";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -89,7 +89,7 @@ const clearCookie = function (req: Request, res: Response) {
     res.send('cookie apagado');
 };
 
-const uuid = function (req: Request, res: Response, next: Function) {
+const uuid = function (req: Request, res: Response, next: NextFunction) {
     const  uniqueId = uuidv4();
     res.send(`UUID: ${uniqueId}`);
 };
