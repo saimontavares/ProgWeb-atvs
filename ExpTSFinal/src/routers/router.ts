@@ -2,6 +2,7 @@ import { Router } from 'express';
 import mainController from '../controllers/main';
 import majorController from '../controllers/major';
 import userController from '../controllers/user';
+import main from '../controllers/main';
 
 const router = Router();
 
@@ -31,6 +32,9 @@ router.get('/user/read/:id', userController.read)
 router.get('/user/update/:id', userController.update)
 router.post('/user/update/:id', userController.update)
 router.post('/user/remove/:id', userController.remove)
+
+router.get('/create-cookie', mainController.createCookie);
+router.get('uuid', mainController.clearCookie);
 
 const html = `
 <!DOCTYPE html>

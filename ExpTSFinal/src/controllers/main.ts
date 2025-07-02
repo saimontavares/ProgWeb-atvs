@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { LoremIpsum } from "lorem-ipsum";
+import { v4 as uuidv4 } from 'uuid';
 
 const index = (req: Request, res: Response) => {
     res.send("Hello World!")
@@ -16,12 +17,12 @@ const lorem = (req: Request, res: Response) => {
     res.send(paragrafos);
 };
 
-const bemvindo = (req: Request, res: Response)=> {
+const bemvindo = (req: Request, res: Response) => {
     const nome = req.params.nome;
     res.send(`Bem-vindo ${nome} ao ICOMP!`)
 };
 
-const hb1 = (req: Request, res: Response) =>  {
+const hb1 = (req: Request, res: Response) => {
     res.render("hb1", {
         mensagem: "Universidade Federal do Amazonas",
         layout: "main",
@@ -72,4 +73,25 @@ const about = (req: Request, res: Response) => {
     });
 };
 
-export default { index, lorem, bemvindo, hb1, hb2, hb3, hb4, about };
+// Função para criar um cookie
+const createCookie = function (req: Request, res: Response) {
+    if (!('nomeCookie' in req.cookies)) {
+        res.cookie('nomeCookie', 'valorCookie');
+        res.send('Cookie criado com sucesso!');
+    }
+    else {
+        res.send('Cookie já existe!');
+    }
+}
+
+const clearCookie = function (req: Request, res: Response) {
+    res.clearCookie('nomeCookie');
+    res.send('cookie apagado');
+};
+
+const uuid = function (req: Request, res: Response, next: Function) {
+    const  uniqueId = uuidv4();
+    res.send(`UUID: ${uniqueId}`);
+};
+
+export default { index, lorem, bemvindo, hb1, hb2, hb3, hb4, about, createCookie, clearCookie };

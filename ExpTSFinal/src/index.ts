@@ -2,6 +2,7 @@ import express, { Response, Request } from "express"
 import dotenv from "dotenv"
 import morgan from "morgan"
 import { engine } from "express-handlebars"
+import cookieParser from 'cookie-parser';
 
 import validateEnv from "./utils/validateEnv"
 import logger from "./middlewares/logger"
@@ -28,6 +29,8 @@ app.set('views', `${process.cwd()}/src/views/main`);
 
 //app.use(morgan("combined"))
 app.use(logger("complete"))
+
+app.use(cookieParser());
 
 //app.use((req, res, next) => {
 //    console.log("Informações sobre acesso")
