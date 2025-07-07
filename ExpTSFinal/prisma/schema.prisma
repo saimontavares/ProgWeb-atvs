@@ -23,7 +23,7 @@ model User {
   majorId String @db.Char(40)
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
-  @@map("usuarios")
+  @@map("users")
 }
 
 model Major {
