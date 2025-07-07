@@ -5,7 +5,7 @@ import { engine } from "express-handlebars"
 
 import validateEnv from "./utils/validateEnv"
 import logger from "./middlewares/logger"
-import router from "./routers/router"
+import router from "./router/router"
 
 dotenv.config()
 validateEnv()
