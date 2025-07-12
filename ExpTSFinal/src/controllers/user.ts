@@ -51,7 +51,7 @@ export const update = async (req: Request, res: Response) => {
         // }
         try {
             await updateUser(id, value);
-            res.redirect('/game');
+            res.redirect('/');
         } catch (error) {
             console.error(error);
             res.status(500).render('user/update', { error: 'Erro ao atualizar usuário.', user: { ...req.body, id }, userSession: req.session.user, logado: req.session.logado });
@@ -149,7 +149,7 @@ const game = async (req: Request, res: Response) => {
     if (!req.session.logado) {
         return res.redirect('/user/login');
     }
-    res.render('index', { user: req.session.user, logado: req.session.logado });
+    res.render('index', { layout:"main", user: req.session.user, logado: req.session.logado });
 }
 
 const changePassword = async (req: Request, res: Response) => {
