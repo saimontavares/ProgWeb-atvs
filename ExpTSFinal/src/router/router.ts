@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import mainController from '../controllers/main';
 import majorController from '../controllers/major';
-import userController from '../controllers/user';
+import userController, { ranking } from '../controllers/user';
 
 const router = Router();
 
@@ -38,10 +38,10 @@ router.get('/user/signup', userController.signup);
 router.post('/user/signup', userController.signup);
 router.get('/user/login', userController.login);
 router.post('/user/login', userController.login);
-// router.get('/ranking', ranking);
+router.get('/ranking', ranking);
 
-// // GameSessionController
-// router.post('/game-session', userController.gameSession);
+// GameSessionController
+router.post('/game-session', userController.gameSession);
 
 const html = `
 <!DOCTYPE html>

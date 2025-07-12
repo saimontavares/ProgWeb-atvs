@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { getAllUsers, getUser, createUser, updateUser, removeUser, checkCredentials, getUserByEmail, gameSession as saveGameSession/*, getRanking*/} from '../services/user'
+import { getAllUsers, getUser, createUser, updateUser, removeUser, checkCredentials, getUserByEmail, gameSession as saveGameSession, getRanking} from '../services/user'
 import { CreateUserDto, UpdateUserDto, RemoveUserDto } from '../types/user'
 import { userSchema } from '../validators/userValidator'
 import { getAllMajors } from '../services/major'
@@ -138,10 +138,10 @@ const gameSession = async (req: Request, res: Response) => {
     }
 }
 
-// export const ranking = async (req: Request, res: Response) => {
-//     const ranking = await getRanking();
-//     res.render('user/ranking', { ranking });
-// };
+export const ranking = async (req: Request, res: Response) => {
+    const ranking = await getRanking();
+    res.render('user/ranking', { ranking });
+};
 
 export default {
     index,
@@ -153,5 +153,5 @@ export default {
     logout,
     signup,
     gameSession,
-    // ranking
+    ranking
 };

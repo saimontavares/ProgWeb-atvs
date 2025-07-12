@@ -1,26 +1,22 @@
+import { Prof, Technologies } from './helpersTypes';
 
-module.exports = {
-    listProfs(profs = []) {
-        const list = (profs ?? []).map((p: any) => `<li>${p.nome}-${p.sala}</li>`);
-        return `<ul>${list.join('')}</ul>`;
-    },
-    listTechnologies(technologies = []) {
-        const list = (technologies ?? [])
-            .filter((t: any) => t.poweredByNodejs)
-            .map((t: any) => `<li>${t.name} - ${t.type}</li>`);
-        return `<ul>${list.join('')}</ul>`;
-    },
-    optionTag(major: { id: number; code: string; name: string }, selectedMajorId: number) {
-        const selected = major.id === selectedMajorId ? 'selected' : '';
-        return `<option value="${major.id}" ${selected}>${major.code} - ${major.name}</option>`;
-    },
-    ifMajorIDEquals(majorId: number, selectedMajorId: number, options: any) {
-        return majorId === selectedMajorId ? options.fn(options.data.root) : options.inverse(options.data.root);
-    },
-    estaLogado(req: any) {
-        return req.session && req.session.user ? true : false;
-    },
-    inc(value: any) {
-        return parseInt(value, 10) + 1;
-    }
-};
+export function listProfs(profs: Prof[] = []) {
+    const list = (profs ?? []).map((p)=>`<li>${p.nome}-${p.sala}</li>`);
+    return `<ul>${list.join('')}</ul>`;
+}
+
+export function listTechnologies(technologies: Technologies[] = []) {
+    const list = (technologies ?? [])
+        .filter(t => t.poweredByNodejs)
+        .map(t => `<li>${t.name} - ${t.type}</li>`);
+    return `<ul>${list.join('')}</ul>`;
+}
+
+export function optionTag(major: { id: number; code: string; name: string }, selectedMajorId: number) {
+    const selected = major.id === selectedMajorId ? 'selected' : '';
+    return `<option value="${major.id}" ${selected}>${major.code} - ${major.name}</option>`;
+}
+
+export function ifMajorIDEquals(majorId: number, selectedMajorId: number, options: any) {
+    return majorId === selectedMajorId ? options.fn(options.data.root) : options.inverse(options.data.root);
+}

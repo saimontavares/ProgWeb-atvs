@@ -207,7 +207,7 @@ function showGameOver() {
       console.log('Score salvo!', data)
     })
     .catch(() => {
-      console.error('Erro ao salvar o score')
+      console.log('Erro ao salvar o score')
     });
 }
 
