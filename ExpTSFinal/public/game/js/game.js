@@ -197,6 +197,18 @@ function showGameOver() {
   gameInterval = null
   stopDifficultyInterval()
   document.getElementById("gameover").style.display = "block"
+  fetch('/game-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ score })
+})
+    .then(res => res.json())
+    .then(data => {
+      console.log('Score salvo!', data)
+    })
+    .catch(() => {
+      console.error('Erro ao salvar o score')
+    });
 }
 
 function hideGameOver() {

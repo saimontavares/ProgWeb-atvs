@@ -33,12 +33,15 @@ router.get('/user/read/:id', userController.read)
 router.get('/user/update/:id', userController.update)
 router.post('/user/update/:id', userController.update)
 router.post('/user/remove/:id', userController.remove)
-router.all('/user/login', userController.login)
 router.all('/user/logout', userController.logout)
 router.get('/user/signup', userController.signup);
 router.post('/user/signup', userController.signup);
 router.get('/user/login', userController.login);
 router.post('/user/login', userController.login);
+// router.get('/ranking', ranking);
+
+// // GameSessionController
+// router.post('/game-session', userController.gameSession);
 
 const html = `
 <!DOCTYPE html>

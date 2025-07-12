@@ -3,10 +3,11 @@ import { LoremIpsum } from "lorem-ipsum";
 import { v4 as uuidv4 } from 'uuid';
 
 export const index = (req: Request, res: Response) => {
-    if (!req.session.logado) {
+    if (!req.session?.logado) {
         return res.redirect('/user/login');
     }
     res.render('index');
+    console.log("Index page accessed");
 };
 
 const lorem = (req: Request, res: Response) => {

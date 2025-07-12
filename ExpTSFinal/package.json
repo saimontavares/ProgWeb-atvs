@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --watch src --ext js, ts,json --exec 'ts-node src/index.ts' --ignore src/public",
+    "start": "nodemon --watch src --ext ts,json --exec ts-node src/index.ts",
     "deploy": "tsc --outDir build",
     "start:prod": "node build/index.js",
     "sass": "sass public/sass/main.scss public/css/main.css --watch"

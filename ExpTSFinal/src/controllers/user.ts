@@ -1,8 +1,9 @@
 import { Request, Response } from 'express'
-import { getAllUsers, getUser, createUser, updateUser, removeUser, checkCredentials } from '../services/user'
+import { getAllUsers, getUser, createUser, updateUser, removeUser, checkCredentials, getUserByEmail, gameSession as saveGameSession/*, getRanking*/} from '../services/user'
 import { CreateUserDto, UpdateUserDto, RemoveUserDto } from '../types/user'
 import { userSchema } from '../validators/userValidator'
 import { getAllMajors } from '../services/major'
+import { GameSession } from '@prisma/client'
 
 export const index = async (req: Request, res: Response) => {
     const users = await getAllUsers();
@@ -94,7 +95,23 @@ const login = async (req: Request, res: Response) => {
         const ok = await checkCredentials(email, password);
         if (ok) {
             req.session.logado = true;
-            res.redirect('/');
+            try {
+                const user = await getUserByEmail(email);
+                if (user) {
+                    req.session.user = user;
+                    console.log('Usuário logado:', user);
+                    res.redirect('/');
+                }
+                else {
+                    res.status(404).render('user/login', { error: 'Usuário não encontrado.' });
+                }
+            } catch (error) {
+                console.error(error);
+                res.status(500).render('user/login', { error: 'Erro ao buscar usuário.' });
+            }
+        }
+        else {
+            res.status(401).render('user/login', { error: 'Usuário ou senha inválidos.' });
         }
     }
 }
@@ -105,6 +122,27 @@ const logout = async (req: Request, res: Response) => {
     })
 }
 
+const gameSession = async (req: Request, res: Response) => {
+    if (req.method === 'POST') {
+        const { score } = req.body;
+        try {
+            if (!req.session.user) {
+                throw new Error('Usuário não autenticado');
+            }
+            await saveGameSession(req.session.user.id, score);
+            res.status(200).send('Game session recorded successfully');
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Error recording game session');
+        }
+    }
+}
+
+// export const ranking = async (req: Request, res: Response) => {
+//     const ranking = await getRanking();
+//     res.render('user/ranking', { ranking });
+// };
+
 export default {
     index,
     create,
@@ -113,5 +151,7 @@ export default {
     remove,
     login,
     logout,
-    signup
+    signup,
+    gameSession,
+    // ranking
 };

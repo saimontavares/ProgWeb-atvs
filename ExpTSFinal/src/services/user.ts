@@ -1,5 +1,6 @@
-import { PrismaClient, User } from '@prisma/client'
+import { GameSession, PrismaClient, User } from '@prisma/client'
 import { CreateUserDto, UpdateUserDto } from '../types/user'
+import { CreateGameSessionDto } from '../types/gameSession'
 import { compare, genSalt, hash } from 'bcryptjs';
 
 const prisma = new PrismaClient()
@@ -31,6 +32,12 @@ export const getUser = async (id: string): Promise<User | null> => {
     });
 }
 
+export const getUserByEmail = async (email: string): Promise<User | null> => {
+    return await prisma.user.findFirst({
+        where: { email }
+    });
+}
+
 export const updateUser = async (
     id: string,
     updateUser: UpdateUserDto
@@ -58,3 +65,29 @@ export const checkCredentials = async (email: string, password: string): Promise
     }
     return false;
 }
+
+export const gameSession = async (userID: string, score: number): Promise<GameSession> => {
+    const gameSessionData: CreateGameSessionDto = { userId: userID, score };
+    return await prisma.gameSession.create({ data: gameSessionData });
+}
+
+// export const getRanking = async () => {
+//     // Busca o maior score de cada usuário e ordena descendentemente
+//     const ranking = await prisma.gameSession.groupBy({
+//         by: ['userId'],
+//         _max: { score: true },
+//         orderBy: { _max: { score: 'desc' } },
+//         take: 10,
+//     });
+
+//     // Busca os dados dos usuários
+//     const users = await prisma.user.findMany({
+//         where: { id: { in: ranking.map(r => r.userId) } }
+//     });
+
+//     // Junta usuário e score
+//     return ranking.map(r => ({
+//         user: users.find(u => u.id === r.userId),
+//         score: r._max.score
+//     }));
+// };

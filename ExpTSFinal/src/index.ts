@@ -1,11 +1,16 @@
 import express, { Response, Request } from "express"
 import dotenv from "dotenv"
-import morgan from "morgan"
 import { engine } from "express-handlebars"
 import cookieParser from 'cookie-parser';
 
 declare module "express-session" {
     interface SessionData {
+        user?: {
+            id: string;
+            name: string;
+            email: string;
+            majorId: string;
+        };
         logado: boolean;
     }
 }
@@ -38,7 +43,6 @@ app.set('views', `${process.cwd()}/src/views/main`);
 //app.use(morgan("combined"))
 app.use(logger("complete"))
 
-
 app.use(
     session({
         genid: () => randomUUID(),
@@ -58,6 +62,8 @@ app.use(cookieParser());
 app.use('/css', express.static(`${publicPath}/css/`))
 app.use('/js', express.static(`${publicPath}/js/`))
 app.use('/img', express.static(`${publicPath}/img/`))
+// use game
+app.use('/game', express.static(`${publicPath}/game/`))
 
 app.use(router);
 
