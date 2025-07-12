@@ -2,7 +2,6 @@ import { Router } from 'express';
 import mainController from '../controllers/main';
 import majorController from '../controllers/major';
 import userController from '../controllers/user';
-import main from '../controllers/main';
 
 const router = Router();
 
@@ -36,6 +35,10 @@ router.post('/user/update/:id', userController.update)
 router.post('/user/remove/:id', userController.remove)
 router.all('/user/login', userController.login)
 router.all('/user/logout', userController.logout)
+router.get('/user/signup', userController.signup);
+router.post('/user/signup', userController.signup);
+router.get('/user/login', userController.login);
+router.post('/user/login', userController.login);
 
 const html = `
 <!DOCTYPE html>

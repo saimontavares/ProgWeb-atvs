@@ -11,3 +11,12 @@ export function listTechnologies(technologies: Technologies[] = []) {
         .map(t => `<li>${t.name} - ${t.type}</li>`);
     return `<ul>${list.join('')}</ul>`;
 }
+
+export function optionTag(major: { id: number; code: string; name: string }, selectedMajorId: number) {
+    const selected = major.id === selectedMajorId ? 'selected' : '';
+    return `<option value="${major.id}" ${selected}>${major.code} - ${major.name}</option>`;
+}
+
+export function ifMajorIDEquals(majorId: number, selectedMajorId: number, options: any) {
+    return majorId === selectedMajorId ? options.fn(options.data.root) : options.inverse(options.data.root);
+}

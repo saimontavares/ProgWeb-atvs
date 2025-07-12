@@ -1,7 +1,6 @@
 import { PrismaClient, User } from '@prisma/client'
 import { CreateUserDto, UpdateUserDto } from '../types/user'
-import { compare, genSalt } from 'bcryptjs';
-import { hash } from 'crypto';
+import { compare, genSalt, hash } from 'bcryptjs';
 
 const prisma = new PrismaClient()
 
@@ -14,7 +13,9 @@ export const createUser = async (
 ): Promise<User> => {
     const salt = await genSalt(parseInt(process.env.ROUNDS_BCRYPT || '10'));
     const password = await hash(data.password, salt);
-    return await prisma.user.create({data : {...data, password} });
+    // Remova repeatPassword do objeto enviado ao Prisma
+    const { repeatPassword, ...userData } = data as any;
+    return await prisma.user.create({ data: { ...userData, password } });
 }
 
 export const userAlreadyExists = async (email: string): Promise<boolean> => {

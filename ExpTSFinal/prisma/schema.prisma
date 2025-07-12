@@ -38,9 +38,9 @@ model Major {
 }
 
 model GameSession {
-  id          String   @id @default(uuid()) @db.Char(36)
-  userId      String   @db.Char(36)
-  score       Int      @db.Int
+  id          String   @id @default(uuid()) @db.Char(40)
+  userId      String   @db.Char(40)
+  score       Int      @db.Int()
   createdAt  DateTime @default(now()) @map("created_at")
   updatedAt  DateTime @updatedAt @map("updated_at")
 

@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
 export const userSchema = Joi.object({
-  fullName: Joi.string().min(2).max(100).required(),
+  name: Joi.string().min(2).max(100).required(),
   email: Joi.string().email().required(),
-  majorId: Joi.string().allow(null, '').optional()
-});
+  password: Joi.string().min(6).required(), // só obrigatório no cadastro
+  majorId: Joi.string().required()});

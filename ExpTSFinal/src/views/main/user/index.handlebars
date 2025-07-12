@@ -16,7 +16,7 @@
     <tbody class="table-group-divider">
         {{#each users}}
         <tr style="vertical-align: middle;">
-            <td>{{fullName}}</td>
+            <td>{{name}}</td>
             <td>{{email}}</td>
             <td>{{majorId}}</td>
             <td style="text-align: right">
@@ -33,7 +33,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                Tem certeza que deseja remover o usuário <strong>{{fullName}}</strong>?
+                                Tem certeza que deseja remover o usuário <strong>{{name}}</strong>?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>

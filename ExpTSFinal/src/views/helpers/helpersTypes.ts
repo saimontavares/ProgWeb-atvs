@@ -8,3 +8,7 @@ export interface Technologies {
     type: string;
     poweredByNodejs: boolean;
 }
+
+export interface MajorID {
+    id: string;
+}

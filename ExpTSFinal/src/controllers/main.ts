@@ -2,8 +2,11 @@ import { NextFunction, Request, Response } from 'express';
 import { LoremIpsum } from "lorem-ipsum";
 import { v4 as uuidv4 } from 'uuid';
 
-const index = (req: Request, res: Response) => {
-    res.send("Hello World!")
+export const index = (req: Request, res: Response) => {
+    if (!req.session.logado) {
+        return res.redirect('/user/login');
+    }
+    res.render('index');
 };
 
 const lorem = (req: Request, res: Response) => {

@@ -14,10 +14,10 @@ export const create = async (req: Request, res: Response) => {
     } else if (req.method === 'POST') {
         try {
             const newMajor = req.body as CreateMajorDto;
-            const { error } = majorSchema.validate(newMajor);
-            if (error) {
-                return res.status(400).render('major/create', { error: error.details[0].message, values: newMajor });
-            }
+            // const { error } = majorSchema.validate(newMajor);
+            // if (error) {
+            //     return res.status(400).render('major/create', { error: error.details[0].message, values: newMajor });
+            // }
             await createMajor(newMajor);
             res.redirect('/major');
         } catch (error) {
@@ -48,10 +48,10 @@ export const update = async (req: Request, res: Response) => {
     } else if (req.method === 'POST') {
         try {
             const updatedMajor = req.body as UpdateMajorDto;
-            const { error } = majorSchema.validate(updatedMajor);
-            if (error) {
-                return res.status(400).render('major/update', { error: error.details[0].message, major: { ...updatedMajor, id } });
-            }
+            // const { error } = majorSchema.validate(updatedMajor);
+            // if (error) {
+            //     return res.status(400).render('major/update', { error: error.details[0].message, major: { ...updatedMajor, id } });
+            // }
             await updateMajor(id, updatedMajor);
             res.redirect('/major');
         } catch (error) {

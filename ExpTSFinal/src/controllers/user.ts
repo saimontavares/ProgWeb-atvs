@@ -44,9 +44,9 @@ export const update = async (req: Request, res: Response) => {
         }
     } else if (req.method === 'POST') {
         const { error, value } = userSchema.validate(req.body);
-        if (error) {
-            return res.status(400).render('user/update', { error: error.details[0].message, user: { ...req.body, id } });
-        }
+        // if (error) {
+        //     return res.status(400).render('user/update', { error: error.details[0].message, user: { ...req.body, id } });
+        // }
         try {
             await updateUser(id, value);
             res.redirect('/user');
@@ -65,6 +65,22 @@ export const remove = async (req: Request, res: Response) => {
             res.redirect('/user');
         } catch (error) {
             console.error(error);
+        }
+    }
+}
+
+const signup = async (req: Request, res: Response) => {
+    if (req.method === 'GET') {
+        const majors = await getAllMajors();
+        res.render('user/signup', { majors });
+    }
+    else if (req.method === 'POST') {
+        try {
+            const user = await createUser(req.body as CreateUserDto);
+            res.redirect('/user/login');
+        } catch (error) {
+            console.error(error);
+            res.status(500).render('user/signup', { error: 'Erro ao criar usuário.' });
         }
     }
 }
@@ -96,5 +112,6 @@ export default {
     update,
     remove,
     login,
-    logout
+    logout,
+    signup
 };
