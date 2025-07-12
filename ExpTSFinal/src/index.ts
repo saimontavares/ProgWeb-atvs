@@ -13,6 +13,8 @@ declare module "express-session" {
 import validateEnv from "./utils/validateEnv"
 import logger from "./middlewares/logger"
 import router from "./router/router"
+import session from "express-session";
+import { randomUUID } from "crypto";
 
 dotenv.config()
 validateEnv()
@@ -35,6 +37,16 @@ app.set('views', `${process.cwd()}/src/views/main`);
 
 //app.use(morgan("combined"))
 app.use(logger("complete"))
+
+
+app.use(
+    session({
+        genid: () => randomUUID(),
+        secret: 'my-secret',
+        resave: true,
+        saveUninitialized: true,
+    })
+);
 
 app.use(cookieParser());
 
