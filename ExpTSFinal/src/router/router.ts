@@ -39,6 +39,9 @@ router.post('/user/signup', userController.signup);
 router.get('/user/login', userController.login);
 router.post('/user/login', userController.login);
 router.get('/ranking', ranking);
+router.get('/user/change-password', userController.changePassword);
+router.post('/user/change-password', userController.changePassword);
+router.get('/game', userController.game);
 
 // GameSessionController
 router.post('/game-session', userController.gameSession);

@@ -4,7 +4,7 @@
 {{/if}}
 <div class="d-flex justify-content-between">
     <div>
-        <a href="/user/" class="btn btn-danger">Cancelar</a>
+        <a href="/" class="btn btn-danger">Cancelar</a>
     </div>
 </div>
 <form action="/user/update/{{user.id}}" method="POST">
@@ -17,8 +17,12 @@
         <input type="email" class="form-control" id="email" name="email" value="{{user.email}}" required>
     </div>
     <div class="mb-3">
-        <label for="majorId" class="form-label">Curso (majorId)</label>
-        <input type="text" class="form-control" id="majorId" name="majorId" value="{{user.majorId}}">
+        <label for="majorId" class="form-label">Curso</label>
+        <select class="form-select" id="majorId" name="majorId" required>
+            {{#each majors}}
+                <option value="{{this.id}}" {{#if (eq this.id ../user.major.id)}}selected{{/if}}>{{this.name}}</option>
+            {{/each}}
+        </select>
     </div>
     <button type="submit" class="btn btn-success">Salvar</button>
 </form>

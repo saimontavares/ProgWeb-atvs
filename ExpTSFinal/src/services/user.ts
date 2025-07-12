@@ -42,9 +42,15 @@ export const updateUser = async (
     id: string,
     updateUser: UpdateUserDto
 ): Promise<User> => {
+    // Se for alteração de senha, encripte antes de salvar
+    let dataToUpdate = { ...updateUser };
+    if (dataToUpdate.password) {
+        const salt = await genSalt(parseInt(process.env.ROUNDS_BCRYPT || '10'));
+        dataToUpdate.password = await hash(dataToUpdate.password, salt);
+    }
     return await prisma.user.update({
         where: { id },
-        data: updateUser
+        data: dataToUpdate
     });
 }
 

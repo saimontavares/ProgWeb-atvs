@@ -20,3 +20,11 @@ export function optionTag(major: { id: number; code: string; name: string }, sel
 export function ifMajorIDEquals(majorId: number, selectedMajorId: number, options: any) {
     return majorId === selectedMajorId ? options.fn(options.data.root) : options.inverse(options.data.root);
 }
+
+export function inc(value: number) {
+    return value + 1;
+}
+
+export function eq(a: any, b: any) {
+    return a === b;
+}

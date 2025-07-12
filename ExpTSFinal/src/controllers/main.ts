@@ -6,7 +6,11 @@ export const index = (req: Request, res: Response) => {
     if (!req.session?.logado) {
         return res.redirect('/user/login');
     }
-    res.render('index');
+    res.render('index', {
+        layout: "main",
+        logado: req.session.logado,
+        user: req.session.user
+    });
     console.log("Index page accessed");
 };
 
@@ -73,7 +77,8 @@ const about = (req: Request, res: Response) => {
         imagens: [
             "/img/space-shooter1.png",
             "/img/space-shooter2.png"
-        ]
+        ],
+        user: req.session.user, logado: req.session.logado
     });
 };
 

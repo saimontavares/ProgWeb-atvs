@@ -7,7 +7,7 @@ import { GameSession } from '@prisma/client'
 
 export const index = async (req: Request, res: Response) => {
     const users = await getAllUsers();
-    res.render('user/index', { users });
+    res.render('user/index', { users, user: req.session.user, logado: req.session.logado });
 }
 
 export const create = async (req: Request, res: Response) => {
@@ -17,7 +17,7 @@ export const create = async (req: Request, res: Response) => {
     } else if (req.method === 'POST') {
         try {
             const user = await createUser(req.body as CreateUserDto);
-            res.redirect('/user');
+            res.redirect('/login');
         } catch (error) {
             console.error(error);
         }
@@ -28,7 +28,7 @@ export const read = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
         const user = await getUser(id);
-        res.render('user/read', { user });
+        res.render('user/read', { user, userSession: req.session.user, logado: req.session.logado });
     } catch (error) {
         console.error(error);
     }
@@ -39,7 +39,8 @@ export const update = async (req: Request, res: Response) => {
     if (req.method === 'GET') {
         try {
             const user = await getUser(id);
-            res.render('user/update', { user });
+            const majors = await getAllMajors();
+            res.render('user/update', { user, majors });
         } catch (error) {
             console.error(error);
         }
@@ -50,10 +51,10 @@ export const update = async (req: Request, res: Response) => {
         // }
         try {
             await updateUser(id, value);
-            res.redirect('/user');
+            res.redirect('/game');
         } catch (error) {
             console.error(error);
-            res.status(500).render('user/update', { error: 'Erro ao atualizar usuário.', user: { ...req.body, id } });
+            res.status(500).render('user/update', { error: 'Erro ao atualizar usuário.', user: { ...req.body, id }, userSession: req.session.user, logado: req.session.logado });
         }
     }
 }
@@ -78,6 +79,7 @@ const signup = async (req: Request, res: Response) => {
     else if (req.method === 'POST') {
         try {
             const user = await createUser(req.body as CreateUserDto);
+            //console.log('Usuário criado:', user);
             res.redirect('/user/login');
         } catch (error) {
             console.error(error);
@@ -99,7 +101,7 @@ const login = async (req: Request, res: Response) => {
                 const user = await getUserByEmail(email);
                 if (user) {
                     req.session.user = user;
-                    console.log('Usuário logado:', user);
+                    //console.log('Usuário logado:', user);
                     res.redirect('/');
                 }
                 else {
@@ -140,8 +142,69 @@ const gameSession = async (req: Request, res: Response) => {
 
 export const ranking = async (req: Request, res: Response) => {
     const ranking = await getRanking();
-    res.render('user/ranking', { ranking });
+    res.render('ranking', { ranking, user: req.session.user, logado: req.session.logado });
 };
+
+const game = async (req: Request, res: Response) => {
+    if (!req.session.logado) {
+        return res.redirect('/user/login');
+    }
+    res.render('index', { user: req.session.user, logado: req.session.logado });
+}
+
+const changePassword = async (req: Request, res: Response) => {
+    if (!req.session.user) {
+        return res.redirect('/user/login');
+    }
+
+    if (req.method === 'GET') {
+        return res.render('user/changePassword', { user: req.session.user, logado: req.session.logado });
+    }
+
+    if (req.method === 'POST') {
+        // Só executa a lógica de alteração de senha se vier do formulário de change-password
+        if ('currentPassword' in req.body && ('confirmPassword' in req.body || 'repeatNewPassword' in req.body)) {
+            const currentPassword = req.body.currentPassword;
+            const newPassword = req.body.newPassword;
+            const confirm = req.body.confirmPassword || req.body.repeatNewPassword;
+            try {
+                if (typeof currentPassword === 'string' && typeof newPassword === 'string' && typeof confirm === 'string') {
+                    // Verifica se a senha atual está correta
+                    const isValid = await checkCredentials(req.session.user.email, currentPassword);
+                    if (!isValid) {
+                        return res.status(400).render('user/changePassword', { 
+                            error: 'Senha atual incorreta.', 
+                            user: req.session.user, 
+                            logado: req.session.logado 
+                        });
+                    }
+
+                    if (newPassword !== confirm) {
+                        return res.status(400).render('user/changePassword', { 
+                            error: 'As novas senhas não coincidem.', 
+                            user: req.session.user, 
+                            logado: req.session.logado 
+                        });
+                    }
+
+                    // Atualiza a senha do usuário
+                    await updateUser(req.session.user.id, { password: newPassword });
+                    return res.redirect('/');
+                }
+            } catch (error) {
+                console.error(error);
+                return res.status(500).render('user/changePassword', { 
+                    error: 'Erro ao trocar a senha.', 
+                    user: req.session.user, 
+                    logado: req.session.logado 
+                });
+            }
+        } else {
+            // Se não for alteração de senha, apenas segue o fluxo normal (ex: cadastro)
+            return res.redirect('/');
+        }
+    }
+}
 
 export default {
     index,
@@ -153,5 +216,7 @@ export default {
     logout,
     signup,
     gameSession,
-    ranking
+    ranking,
+    game,
+    changePassword
 };
